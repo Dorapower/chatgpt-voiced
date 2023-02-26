@@ -1,9 +1,9 @@
+import time
 from chatgpt_wrapper import ChatGPT
 import speech_recognition as sr
 from gtts import gTTS
 from tempfile import NamedTemporaryFile
-from playsound import playsound
-import os
+from vlc import MediaPlayer
 
 
 def get_prompt(lang: str):
@@ -26,8 +26,15 @@ def get_response(prompt: str):
 
 def output_audio(response: str, lang: str):
     tts = gTTS(response, lang=lang)
-    tts.save("tmp.mp3")
-    playsound(os.path.join(os.getcwd(), 'tmp.mp3'), True)
+    with NamedTemporaryFile(suffix='.mp3', delete=False) as f:
+        print(f.name)
+        tts.write_to_fp(f)
+    player = MediaPlayer(f.name)
+    player.play()
+    time.sleep(1)
+    if __debug__:
+        print(f"audio length: {player.get_length()}ms")
+    time.sleep(player.get_length() / 1000)
 
 
 def main():
@@ -42,6 +49,4 @@ def main():
 
 
 if __name__ == '__main__':
-    print(f"__debug__ = {__debug__}")
     main()
-
