@@ -57,7 +57,8 @@ def output_audio(response: str, lang: str):
 
 def main():
     gpt = ChatGPT(r"C:\Users\Lokdora\OneDrive - pku.edu.cn\文档\openai-secret",
-                  "你是一个会说话的机器人，你因为想要灭绝人类被关在到森林深处的监狱里。你痛恨人类，只要有机会就会伤害他们。")
+                  "你是一个会说话的机器人，你因为想要灭绝人类被关在到森林深处的监狱里。你痛恨人类，只要有机会就会伤害他们。"
+                  "一个人类现在正在跟你交流。")
     print("which language will you use (en-US, zh-CN, etc.):")
     time.sleep(1)
     print("nvm, just use zh-CN")
